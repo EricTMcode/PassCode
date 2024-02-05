@@ -8,12 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isAuthenticated = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if isAuthenticated {
+                VStack {
+                    Text("You're in!")
+                    
+                    Button("LogOut") {
+                        isAuthenticated = false
+                    }
+                }
+            } else {
+                PasscodeView(isAuthenticated: $isAuthenticated)
+            }
         }
         .padding()
     }
