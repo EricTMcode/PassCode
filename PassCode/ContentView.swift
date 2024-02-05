@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.scenePhase) var scenePhase
     @State private var isAuthenticated = false
     
     var body: some View {
@@ -25,6 +26,12 @@ struct ContentView: View {
             }
         }
         .padding()
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .inactive {
+                isAuthenticated = false
+            }
+        }
+        
     }
 }
 
